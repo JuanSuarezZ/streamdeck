@@ -9,23 +9,10 @@ abstract class ConectionEvent extends Equatable {
 }
 
 class InicialConection extends ConectionEvent {
-  final String username;
-  final int port;
-  final String password;
-  final String ip;
+  final ConeccionModel coneccionModel;
 
-  const InicialConection({
-    required this.port,
-    required this.username,
-    required this.password,
-    required this.ip,
-  });
+  const InicialConection({required this.coneccionModel});
 
   @override
-  List<Object> get props => [
-        port,
-        username,
-        password,
-        ip,
-      ];
+  List<Object> get props => [coneccionModel];
 }

@@ -4,6 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'package:dartssh2/dartssh2.dart';
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
+import 'package:streamdeck/models/coneccion_model.dart';
 import 'package:streamdeck/state/conectionSingelton/ssh_singelton.dart';
 
 part 'conection_event.dart';
@@ -21,16 +22,13 @@ class ConectionBloc extends Bloc<ConectionEvent, ConectionState> {
   ) async {
     //business logic
     final ssh = SSHSingleton();
-    await ssh.initSSHClient();
+    await ssh.initSSHClient(event.coneccionModel);
 
     dev.log("${event.props}");
     emit(
       state.copyWith(
         ssh.client,
-        ip: event.ip,
-        password: event.password,
-        port: event.port,
-        username: event.username,
+        coneccionModel: event.coneccionModel,
         status: ConectionStatus.success,
       ),
     );

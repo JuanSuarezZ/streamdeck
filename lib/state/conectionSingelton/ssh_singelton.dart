@@ -1,6 +1,8 @@
 import 'package:dartssh2/dartssh2.dart';
 import 'dart:developer' as dev;
 
+import 'package:streamdeck/models/coneccion_model.dart';
+
 class SSHSingleton {
   //save the private constructor
   static final SSHSingleton _singleton =
@@ -17,26 +19,19 @@ class SSHSingleton {
   //private constructor
   SSHSingleton._internal(this.client, {required this.port});
 
-  Future<void> initSSHClient() async {
-    final client = SSHClient(
-      await SSHSocket.connect('192.168.2.76', 22),
-      username: 'juan',
-      onPasswordRequest: () => '0007',
-    );
+  Future<void> initSSHClient(ConeccionModel c) async {
+    try {
+      final client = SSHClient(
+        await SSHSocket.connect(c.ip, c.port),
+        username: c.username,
+        onPasswordRequest: () => c.password,
+      );
 
-    await client.run('export DISPLAY=:0');
+      await client.run('export DISPLAY=:0');
+    } catch (e) {
+      dev.log("error + $e");
+    }
 
     _singleton.client = client;
-  }
-
-  //
-  Future<void> reconect() async {
-    final client = SSHClient(
-      await SSHSocket.connect('192.168.2.76', 22),
-      username: 'juan',
-      onPasswordRequest: () => '0007',
-    );
-    _singleton.client = client;
-    dev.log("SockeT");
   }
 }

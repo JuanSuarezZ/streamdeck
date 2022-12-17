@@ -11,37 +11,24 @@ extension ConectionStateX on ConectionStatus {
 }
 
 class ConectionState extends Equatable {
-  final int port;
-  final String ip;
-  final String username;
-  final String password;
-  final ConectionStatus status;
   SSHClient? sshClient;
+  ConeccionModel? coneccionModel;
+  ConectionStatus status;
 
   ConectionState(
     SSHClient? sshClient, {
-    this.username = '',
-    this.port = 0,
-    this.password = ' ',
-    this.ip = '',
+    this.coneccionModel,
     this.status = ConectionStatus.initial,
   });
 
   @override
-  List<Object?> get props => [port, ip, username, password, status];
+  List<Object?> get props => [sshClient, coneccionModel, status];
 
   ConectionState copyWith(SSHClient? sshClient,
-      {String? username,
-      int? port,
-      String? password,
-      String? ip,
-      required ConectionStatus status}) {
+      {ConeccionModel? coneccionModel, required ConectionStatus status}) {
     return ConectionState(
       sshClient,
-      ip: ip!,
-      port: port!,
-      password: password!,
-      username: username!,
+      coneccionModel: coneccionModel,
       status: status,
     );
   }
