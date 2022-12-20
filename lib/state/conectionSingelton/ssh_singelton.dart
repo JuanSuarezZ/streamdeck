@@ -28,10 +28,10 @@ class SSHSingleton {
       );
 
       await client.run('export DISPLAY=:0');
+      _singleton.client = client;
     } catch (e) {
       dev.log("error + $e");
+      _singleton.client = client;
     }
-
-    _singleton.client = client;
   }
 }

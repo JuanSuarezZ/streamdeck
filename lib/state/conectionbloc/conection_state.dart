@@ -11,12 +11,12 @@ extension ConectionStateX on ConectionStatus {
 }
 
 class ConectionState extends Equatable {
-  SSHClient? sshClient;
-  ConeccionModel? coneccionModel;
-  ConectionStatus status;
+  final SSHClient? sshClient;
+  final ConeccionModel? coneccionModel;
+  final ConectionStatus status;
 
-  ConectionState(
-    SSHClient? sshClient, {
+  const ConectionState({
+    this.sshClient,
     this.coneccionModel,
     this.status = ConectionStatus.initial,
   });
@@ -24,11 +24,14 @@ class ConectionState extends Equatable {
   @override
   List<Object?> get props => [sshClient, coneccionModel, status];
 
-  ConectionState copyWith(SSHClient? sshClient,
-      {ConeccionModel? coneccionModel, required ConectionStatus status}) {
+  ConectionState copyWith({
+    SSHClient? sshClient,
+    ConeccionModel? coneccionModel,
+    required ConectionStatus status,
+  }) {
     return ConectionState(
-      sshClient,
-      coneccionModel: coneccionModel,
+      sshClient: sshClient ?? this.sshClient,
+      coneccionModel: coneccionModel ?? this.coneccionModel,
       status: status,
     );
   }

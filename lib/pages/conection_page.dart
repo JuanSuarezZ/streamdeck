@@ -22,7 +22,7 @@ class _ConectionPage extends State<ConectionPage> {
       body: Center(
         child: IconButton(
           icon: const Icon(Icons.abc),
-          onPressed: () {
+          onPressed: () async {
             conectionBloc.add(
               InicialConection(
                 coneccionModel: ConeccionModel(

@@ -1,6 +1,5 @@
 part of 'conection_bloc.dart';
 
-@immutable
 abstract class ConectionEvent extends Equatable {
   const ConectionEvent();
 
@@ -15,4 +14,20 @@ class InicialConection extends ConectionEvent {
 
   @override
   List<Object> get props => [coneccionModel];
+}
+
+class SoundOff extends ConectionEvent {
+  final String command = "amixer -D pulse sset Master unmute";
+  const SoundOff();
+
+  @override
+  List<Object> get props => [command];
+}
+
+class SoundON extends ConectionEvent {
+  final String command = "amixer -D pulse sset Master mute";
+  const SoundON();
+
+  @override
+  List<Object> get props => [command];
 }

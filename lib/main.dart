@@ -3,7 +3,6 @@ import 'dart:developer';
 
 import 'package:dartssh2/dartssh2.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:streamdeck/core/routes.dart';
 import 'package:streamdeck/state/conectionbloc/conection_bloc.dart';
@@ -22,7 +21,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: 'Material App',
         routes: getAplicationRoutes,
-        initialRoute: "home",
+        initialRoute: "conecction",
       ),
     );
   }
