@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:streamdeck/models/coneccion_model.dart';
-import 'package:streamdeck/state/conectionSingelton/ssh_singelton.dart';
 
 import '../state/conectionbloc/conection_bloc.dart';
 
@@ -29,7 +26,7 @@ class _ConectionPage extends State<ConectionPage> {
                   username: "juan",
                   ip: '192.168.2.76',
                   port: 22,
-                  password: '0007',
+                  password: 'xxxx',
                 ),
               ),
             );

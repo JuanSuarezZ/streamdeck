@@ -15,8 +15,116 @@ class ConectionBloc extends Bloc<ConectionEvent, ConectionState> {
   //
   ConectionBloc() : super(const ConectionState()) {
     on<InicialConection>(onInicialConectionHandler);
+    on<AndroidStudio>(androidStudio);
     on<SoundOff>(onSoundOff);
     on<SoundON>(onSoundON);
+    on<Chrome>(onChrome);
+    on<VScode>(vscode);
+    on<Terminal>(terminal);
+  }
+
+  Future<void> terminal(
+    Terminal event,
+    Emitter<ConectionState> emit,
+  ) async {
+    //business logic
+    try {
+      final ssh = SSHSingleton();
+      final uptime = await ssh.client?.run(event.command);
+
+      log(utf8.decode(uptime!).toString());
+      emit(
+        state.copyWith(
+          status: ConectionStatus.success,
+        ),
+      );
+      dev.log("${event.props}");
+    } catch (e) {
+      emit(
+        state.copyWith(
+          status: ConectionStatus.error,
+        ),
+      );
+      dev.log("${state.props}");
+    }
+  }
+
+  Future<void> androidStudio(
+    AndroidStudio event,
+    Emitter<ConectionState> emit,
+  ) async {
+    //business logic
+    try {
+      final ssh = SSHSingleton();
+      final uptime = await ssh.client?.run(event.command);
+
+      log(utf8.decode(uptime!).toString());
+      emit(
+        state.copyWith(
+          status: ConectionStatus.success,
+        ),
+      );
+      dev.log("${event.props}");
+    } catch (e) {
+      emit(
+        state.copyWith(
+          status: ConectionStatus.error,
+        ),
+      );
+      dev.log("${state.props}");
+    }
+  }
+
+  Future<void> vscode(
+    VScode event,
+    Emitter<ConectionState> emit,
+  ) async {
+    //business logic
+    try {
+      final ssh = SSHSingleton();
+      final uptime = await ssh.client?.run(event.command);
+
+      log(utf8.decode(uptime!).toString());
+      emit(
+        state.copyWith(
+          status: ConectionStatus.success,
+        ),
+      );
+      dev.log("${event.props}");
+    } catch (e) {
+      emit(
+        state.copyWith(
+          status: ConectionStatus.error,
+        ),
+      );
+      dev.log("${state.props}");
+    }
+  }
+
+  Future<void> onChrome(
+    Chrome event,
+    Emitter<ConectionState> emit,
+  ) async {
+    //business logic
+    try {
+      final ssh = SSHSingleton();
+      final uptime = await ssh.client?.run(event.command);
+
+      log(utf8.decode(uptime!).toString());
+      emit(
+        state.copyWith(
+          status: ConectionStatus.success,
+        ),
+      );
+      dev.log("${event.props}");
+    } catch (e) {
+      emit(
+        state.copyWith(
+          status: ConectionStatus.error,
+        ),
+      );
+      dev.log("${state.props}");
+    }
   }
 
   Future<void> onSoundON(
@@ -24,6 +132,7 @@ class ConectionBloc extends Bloc<ConectionEvent, ConectionState> {
     Emitter<ConectionState> emit,
   ) async {
     //business logic
+
     try {
       final ssh = SSHSingleton();
       final uptime = await ssh.client?.run(event.command);
@@ -89,4 +198,6 @@ class ConectionBloc extends Bloc<ConectionEvent, ConectionState> {
     );
     dev.log("${state.props}");
   }
+
+  void runCommand() {}
 }

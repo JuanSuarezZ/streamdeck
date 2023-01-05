@@ -44,13 +44,10 @@ class _ProgramButtonState extends State<ProgramButton> {
                       size: 60,
                     ),
                     onPressed: () {
-                      flag == true
-                          ? widget.function()
-                          : widget.function2!() ?? widget.function();
-                      flag = !flag;
-
-                      print(flag);
-                      setState(() {});
+                      flag == true ? widget.function() : widget.function2!();
+                      setState(() {
+                        flag = !flag;
+                      });
                     },
                   ),
                 )
@@ -59,7 +56,7 @@ class _ProgramButtonState extends State<ProgramButton> {
                   width: 70,
                   child: InkWell(
                     child: Image.asset(widget.asset!),
-                    onTap: () => widget.function,
+                    onTap: () => widget.function(),
                   ),
                 ),
         ],

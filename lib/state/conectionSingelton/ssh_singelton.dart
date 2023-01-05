@@ -24,9 +24,8 @@ class SSHSingleton {
       final client = SSHClient(
         await SSHSocket.connect(c.ip, c.port),
         username: c.username,
-        onPasswordRequest: () => c.password,
+        identities: SSHKeyPair.fromPem(file),
       );
-
       await client.run('export DISPLAY=:0');
       _singleton.client = client;
     } catch (e) {
@@ -35,3 +34,5 @@ class SSHSingleton {
     }
   }
 }
+
+const file = '''YOUR SSH KEY''';

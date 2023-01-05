@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -66,15 +64,16 @@ class _HomePageState extends State<HomePage> {
       ),
       ProgramButton(
         asset: "assets/vscode.png",
-        function: () => {},
+        function: () {
+          conectionBloc.add(const VScode());
+        },
       ),
       ProgramButton(
-        asset: "assets/android_studio.png",
-        function: () => {},
-      ),
+          asset: "assets/android_studio.png",
+          function: () => conectionBloc.add(const AndroidStudio())),
       ProgramButton(
         asset: "assets/google_chrome.png",
-        function: () => {},
+        function: () => conectionBloc.add(const Chrome()),
       ),
       ProgramButton(
         asset: "assets/folder.png",
@@ -82,7 +81,7 @@ class _HomePageState extends State<HomePage> {
       ),
       ProgramButton(
         asset: "assets/terminal.png",
-        function: () => {},
+        function: () => conectionBloc.add(const Terminal()),
       ),
       ProgramButton(
         icon: Icons.volume_off,
