@@ -17,7 +17,7 @@ class InicialConection extends ConectionEvent {
 }
 
 class SoundOff extends ConectionEvent {
-  final String command = "amixer -D pulse sset Master unmute";
+  final String command = "amixer -D pulse sset Master mute";
   // final String command = "amixer set Master mute;amixer set Speaker mute";
   const SoundOff();
 
@@ -26,7 +26,7 @@ class SoundOff extends ConectionEvent {
 }
 
 class SoundON extends ConectionEvent {
-  final String command = "amixer -D pulse sset Master mute";
+  final String command = "amixer -D pulse sset Master unmute";
   // final String command = "amixer set Speaker unmute;amixer set Master unmute";
   const SoundON();
 
@@ -63,9 +63,32 @@ class AndroidStudio extends ConectionEvent {
 }
 
 class Terminal extends ConectionEvent {
-  // final String command = "DISPLAY=:0 nohup konsole -e /bin/zsh";
-  final String command = "DISPLAY=:0 nohup dolphin --new-window";
+  final String command = "DISPLAY=:0 nohup konsole -e /bin/zsh";
   const Terminal();
+
+  @override
+  List<Object> get props => [command];
+}
+
+class Dolphin extends ConectionEvent {
+  final String command = "DISPLAY=:0 nohup dolphin --new-window";
+  const Dolphin();
+
+  @override
+  List<Object> get props => [command];
+}
+
+class MicON extends ConectionEvent {
+  final String command = "amixer -D pulse sset Capture cap";
+  const MicON();
+
+  @override
+  List<Object> get props => [command];
+}
+
+class MicOff extends ConectionEvent {
+  final String command = "amixer -D pulse sset Capture nocap";
+  const MicOff();
 
   @override
   List<Object> get props => [command];

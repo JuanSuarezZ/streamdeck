@@ -77,7 +77,7 @@ class _HomePageState extends State<HomePage> {
       ),
       ProgramButton(
         asset: "assets/folder.png",
-        function: () => {},
+        function: () => conectionBloc.add(const Dolphin()),
       ),
       ProgramButton(
         asset: "assets/terminal.png",
@@ -92,7 +92,8 @@ class _HomePageState extends State<HomePage> {
       ProgramButton(
         icon: Icons.mic_off,
         icon2: Icons.mic,
-        function: () => {},
+        function: () => conectionBloc.add(const MicON()),
+        function2: () => conectionBloc.add(const MicOff()),
       ),
       ProgramButton(
         icon: Icons.star,

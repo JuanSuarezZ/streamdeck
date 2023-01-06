@@ -21,6 +21,60 @@ class ConectionBloc extends Bloc<ConectionEvent, ConectionState> {
     on<Chrome>(onChrome);
     on<VScode>(vscode);
     on<Terminal>(terminal);
+    on<Dolphin>(dolphin);
+    on<MicON>(micON);
+    on<MicOff>(micOff);
+  }
+
+  Future<void> micOff(
+    MicOff event,
+    Emitter<ConectionState> emit,
+  ) async {
+    //business logic
+    try {
+      await runCommand(event, emit);
+    } catch (e) {
+      emit(
+        state.copyWith(
+          status: ConectionStatus.error,
+        ),
+      );
+      dev.log("${state.props}");
+    }
+  }
+
+  Future<void> micON(
+    MicON event,
+    Emitter<ConectionState> emit,
+  ) async {
+    //business logic
+    try {
+      await runCommand(event, emit);
+    } catch (e) {
+      emit(
+        state.copyWith(
+          status: ConectionStatus.error,
+        ),
+      );
+      dev.log("${state.props}");
+    }
+  }
+
+  Future<void> dolphin(
+    Dolphin event,
+    Emitter<ConectionState> emit,
+  ) async {
+    //business logic
+    try {
+      await runCommand(event, emit);
+    } catch (e) {
+      emit(
+        state.copyWith(
+          status: ConectionStatus.error,
+        ),
+      );
+      dev.log("${state.props}");
+    }
   }
 
   Future<void> terminal(
@@ -29,16 +83,7 @@ class ConectionBloc extends Bloc<ConectionEvent, ConectionState> {
   ) async {
     //business logic
     try {
-      final ssh = SSHSingleton();
-      final uptime = await ssh.client?.run(event.command);
-
-      log(utf8.decode(uptime!).toString());
-      emit(
-        state.copyWith(
-          status: ConectionStatus.success,
-        ),
-      );
-      dev.log("${event.props}");
+      await runCommand(event, emit);
     } catch (e) {
       emit(
         state.copyWith(
@@ -55,16 +100,7 @@ class ConectionBloc extends Bloc<ConectionEvent, ConectionState> {
   ) async {
     //business logic
     try {
-      final ssh = SSHSingleton();
-      final uptime = await ssh.client?.run(event.command);
-
-      log(utf8.decode(uptime!).toString());
-      emit(
-        state.copyWith(
-          status: ConectionStatus.success,
-        ),
-      );
-      dev.log("${event.props}");
+      await runCommand(event, emit);
     } catch (e) {
       emit(
         state.copyWith(
@@ -81,16 +117,7 @@ class ConectionBloc extends Bloc<ConectionEvent, ConectionState> {
   ) async {
     //business logic
     try {
-      final ssh = SSHSingleton();
-      final uptime = await ssh.client?.run(event.command);
-
-      log(utf8.decode(uptime!).toString());
-      emit(
-        state.copyWith(
-          status: ConectionStatus.success,
-        ),
-      );
-      dev.log("${event.props}");
+      await runCommand(event, emit);
     } catch (e) {
       emit(
         state.copyWith(
@@ -107,16 +134,7 @@ class ConectionBloc extends Bloc<ConectionEvent, ConectionState> {
   ) async {
     //business logic
     try {
-      final ssh = SSHSingleton();
-      final uptime = await ssh.client?.run(event.command);
-
-      log(utf8.decode(uptime!).toString());
-      emit(
-        state.copyWith(
-          status: ConectionStatus.success,
-        ),
-      );
-      dev.log("${event.props}");
+      await runCommand(event, emit);
     } catch (e) {
       emit(
         state.copyWith(
@@ -134,16 +152,7 @@ class ConectionBloc extends Bloc<ConectionEvent, ConectionState> {
     //business logic
 
     try {
-      final ssh = SSHSingleton();
-      final uptime = await ssh.client?.run(event.command);
-
-      log(utf8.decode(uptime!).toString());
-      emit(
-        state.copyWith(
-          status: ConectionStatus.success,
-        ),
-      );
-      dev.log("${event.props}");
+      await runCommand(event, emit);
     } catch (e) {
       emit(
         state.copyWith(
@@ -161,16 +170,7 @@ class ConectionBloc extends Bloc<ConectionEvent, ConectionState> {
     //business logic
 
     try {
-      final ssh = SSHSingleton();
-      final uptime = await ssh.client?.run(event.command);
-
-      log(utf8.decode(uptime!).toString());
-      emit(
-        state.copyWith(
-          status: ConectionStatus.success,
-        ),
-      );
-      dev.log("${event.props}");
+      await runCommand(event, emit);
     } catch (e) {
       emit(
         state.copyWith(
@@ -199,5 +199,16 @@ class ConectionBloc extends Bloc<ConectionEvent, ConectionState> {
     dev.log("${state.props}");
   }
 
-  void runCommand() {}
+  runCommand(event, emit) async {
+    final ssh = SSHSingleton();
+    final uptime = await ssh.client?.run(event.command);
+
+    log(utf8.decode(uptime!).toString());
+    emit(
+      state.copyWith(
+        status: ConectionStatus.success,
+      ),
+    );
+    dev.log("${event.props}");
+  }
 }

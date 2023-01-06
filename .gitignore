@@ -8,6 +8,7 @@
 .buildlog/
 .history
 .svn/
+.lib/state/conectionSingelton/ssh_singelton.dart
 migrate_working_dir/
 
 # IntelliJ related
